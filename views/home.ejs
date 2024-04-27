@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Home Page</title>
+    <link rel="stylesheet" href="/home.css"/>
+  </head>
+  <body>
+    <div class="main">
+      <h1>Url shortner web app</h1>
+      <% if (locals.id) { %>
+      <p>Url Generated : https://localhost:5000/api/url/<%= id %></p>
+
+      <% } %>
+      <form method="POST" action="/api/url">
+        <label>Enter your url</label>
+        <input
+          type="text"
+          placeholder="https://google.com"
+          name="redirectUrl"
+        />
+        <button type="submit">Generate</button>
+      </form>
+
+      <div>
+        <table class="table">
+          <thead>
+            <th>Serial Number</th>
+            <th>Short ID</th>
+            <th>Redirect to</th>
+            <th>Number of clicks</th>
+          </thead>
+          <% urls.forEach((url,index) => { %>
+          <tr>
+            <td><%= index + 1 %></td>
+            <td><%= url.shortId %></td>
+            <td><%= url.redirectUrl %></td>
+            <td><%= url.visitUrlHistory.length %></td>
+          </tr>
+
+          <% }) %>
+        </table>
+      </div>
+    </div>
+  </body>
+</html>
